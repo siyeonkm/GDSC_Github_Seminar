@@ -40,4 +40,16 @@ public class MemberService {
         member.addPoint(point);
         return memberRepository.save(member);
     }
+
+    @Transactional
+    public Boolean deleteMember(Long id) {
+        try{
+            Member member = findMemberById(id);
+            memberRepository.delete(member);
+            return true;
+        }
+        catch(Exception e) {
+            return false;
+        }
+    }
 }
