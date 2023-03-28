@@ -42,14 +42,8 @@ public class MemberService {
     }
 
     @Transactional
-    public Boolean deleteMember(Long id) {
-        try{
-            Member member = findMemberById(id);
-            memberRepository.delete(member);
-            return true;
-        }
-        catch(Exception e) {
-            return false;
-        }
+    public void deleteMember(Long id) {
+        Member member = findMemberById(id);
+        memberRepository.delete(member);
     }
 }

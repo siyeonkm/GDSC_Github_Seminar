@@ -50,8 +50,7 @@ public class MemberController {
 
     @DeleteMapping("/{memberId}")
     public ResponseEntity<String> memberDelete(@PathVariable Long memberId) {
-        Boolean isDeleted = memberService.deleteMember(memberId);
-        if(isDeleted) return ResponseEntity.ok("member: " + memberId + "deleted");
-        else throw new IllegalArgumentException("member not found: " + memberId);
+        memberService.deleteMember(memberId);
+        return ResponseEntity.ok("member: " + memberId + "deleted");
     }
 }
