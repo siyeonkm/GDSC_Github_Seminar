@@ -33,4 +33,11 @@ public class MemberService {
         member.updateName(name);
         return memberRepository.save(member);
     }
+
+    @Transactional
+    public Member updatePoint(Long id, Integer point) {
+        Member member = findMemberById(id);
+        member.addPoint(point);
+        return memberRepository.save(member);
+    }
 }

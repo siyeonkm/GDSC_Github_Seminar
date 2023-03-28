@@ -39,4 +39,12 @@ public class MemberController {
         return ResponseEntity.ok(memberOutput);
     }
 
+    @PatchMapping("/{memberId}/point")
+    public ResponseEntity<MemberResponseDTO> memberPointModify(@PathVariable Long memberId, @RequestBody PointRequestDTO pointInput) {
+        Member memberPatched = memberService.updatePoint(memberId, pointInput.getPoint());
+        MemberResponseDTO memberOutput = MemberResponseDTO.builder()
+                .m(memberPatched)
+                .build();
+        return ResponseEntity.ok(memberOutput);
+    }
 }
