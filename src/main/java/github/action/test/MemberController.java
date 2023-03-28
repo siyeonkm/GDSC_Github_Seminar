@@ -29,4 +29,14 @@ public class MemberController {
                 .build();
         return ResponseEntity.ok(memberOutput);
     }
+
+    @PatchMapping("/{memberId}/name")
+    public ResponseEntity<MemberResponseDTO> memberNameModify(@PathVariable Long memberId, @RequestBody MemberRequestDTO memberInput) {
+        Member memberPatched = memberService.updateName(memberId, memberInput.getName());
+        MemberResponseDTO memberOutput = MemberResponseDTO.builder()
+                .m(memberPatched)
+                .build();
+        return ResponseEntity.ok(memberOutput);
+    }
+
 }
