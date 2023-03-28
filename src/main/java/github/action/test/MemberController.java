@@ -20,4 +20,13 @@ public class MemberController {
                 .build();
         return ResponseEntity.created(URI.create("/members/" + memberOutput.getId())).body(memberOutput);
     }
+
+    @GetMapping("/{memberId}")
+    public ResponseEntity<MemberResponseDTO> memberDetailById(@PathVariable Long memberId) {
+        Member member = memberService.findMemberById(memberId);
+        MemberResponseDTO memberOutput = MemberResponseDTO.builder()
+                .m(member)
+                .build();
+        return ResponseEntity.ok(memberOutput);
+    }
 }

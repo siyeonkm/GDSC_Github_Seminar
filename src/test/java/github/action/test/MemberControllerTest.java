@@ -42,4 +42,14 @@ class MemberControllerTest {
         resultActions.andExpect(status().isCreated()).andExpect(jsonPath("$.name")
                 .value(equalTo("하수민")));
     }
+
+    @Test
+    void memberDetailById() throws Exception {
+        ResultActions resultActions = this.mockMvc.perform(MockMvcRequestBuilders.get("/members/1"));
+
+        resultActions.andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id").value(equalTo(1)))
+                .andDo(print());
+    }
 }

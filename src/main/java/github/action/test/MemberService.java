@@ -20,4 +20,12 @@ public class MemberService {
                                     .build();
         return memberRepository.save(newMember);
     }
+
+    @Transactional(readOnly = true)
+    public Member findMemberById(Long memberId) {
+        return memberRepository.findMemberByMemberId(memberId)
+                .orElseThrow(IllegalArgumentException::new);
+    }
+
+
 }
