@@ -30,7 +30,7 @@ class MemberControllerTest {
     @Test
     void memberAdd() throws Exception {
         MemberRequestDTO memberRequestDTO = MemberRequestDTO.builder()
-                                                            .name("김수민")
+                                                            .name("하수민")
                                                             .email("soominna@gmail.com")
                                                             .build();
 
