@@ -27,5 +27,17 @@ public class MemberService {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
+    @Transactional
+    public Member updateName(Long id, String name) {
+        Member member = findMemberById(id);
+        member.updateName(name);
+        return memberRepository.save(member);
+    }
 
+    @Transactional
+    public Member updatePoint(Long id, Integer point) {
+        Member member = findMemberById(id);
+        member.addPoint(point);
+        return memberRepository.save(member);
+    }
 }

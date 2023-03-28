@@ -52,4 +52,28 @@ class MemberControllerTest {
                 .andExpect(jsonPath("$.id").value(equalTo(1)))
                 .andDo(print());
     }
+
+    @Test
+    void memberNameModify() throws Exception {
+        MemberRequestDTO memberRequestDTO = MemberRequestDTO.builder().name("김수연").build();
+
+        this.mockMvc.perform(MockMvcRequestBuilders.patch("/members/1/name")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(memberRequestDTO)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value(equalTo("김수연")))
+                .andDo(print());
+    }
+
+    @Test
+    void memberPointModify() throws Exception {
+        PointRequestDTO pointRequestDTO = PointRequestDTO.builder().point(3).build();
+
+        this.mockMvc.perform(MockMvcRequestBuilders.patch("/members/1/point")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(pointRequestDTO)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.point").value(equalTo(3)))
+                .andDo(print());
+    }
 }
