@@ -76,4 +76,11 @@ class MemberControllerTest {
                 .andExpect(jsonPath("$.point").value(equalTo(3)))
                 .andDo(print());
     }
+
+    @Test
+    void memberDelete() throws Exception {
+        this.mockMvc.perform((MockMvcRequestBuilders.delete("/members/1")))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
 }
