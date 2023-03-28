@@ -10,10 +10,14 @@ name: Java CI with Gradle
 on:
   pull_request:
     branches: [ "main" ]
+    
+permissions:
+  checks: write
+  pull-requests: write
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v3
@@ -23,6 +27,16 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+    
+    - name: Gradle Caching
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
         
     # Gradle wrapper 파일 실행 권한주기
     - name: Grant execute permission for gradlew
